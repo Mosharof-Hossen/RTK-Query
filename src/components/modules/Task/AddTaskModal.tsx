@@ -24,10 +24,11 @@ const AddTaskModal = () => {
             ...data,
             isCompleted: false
         }
-        const res = await createTask(taskData)
+        const res = await createTask(taskData).unwrap()
         console.log("Inside submit function:", res);
-        setOpen(false);
         form.reset();
+        setOpen(false);
+        
     }
 
     return (

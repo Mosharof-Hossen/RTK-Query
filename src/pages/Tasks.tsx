@@ -7,7 +7,12 @@ import { TTask } from "@/Types/tasks";
 
 
 const Tasks = () => {
-    const { data, isLoading, isError } = useGetTasksQuery({});
+    const { data, isLoading, isError } = useGetTasksQuery(undefined, {
+        // pollingInterval:1000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true,
+        refetchOnReconnect: true
+    });
     if (isLoading) {
         return <p>Loading....</p>
     }
@@ -28,7 +33,7 @@ const Tasks = () => {
             </div>
             <div className="space-y-5 mt-5">
                 {
-                    !isLoading && data?.tasks.map((task:TTask) => <TaskCard task={task} key={task._id}></TaskCard>)
+                    !isLoading && data?.tasks.map((task: TTask) => <TaskCard task={task} key={task._id}></TaskCard>)
                 }
             </div>
 
