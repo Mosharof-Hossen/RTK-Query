@@ -1,9 +1,17 @@
 import AddTaskModal from "@/components/modules/Task/AddTaskModal";
+import TaskCard from "@/components/modules/Task/TaskCard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useGetTasksQuery } from "@/redux/api/baseApi";
+import { TTask } from "@/Types/tasks";
 
 
 
 const Tasks = () => {
+    const { data, isLoading, isError } = useGetTasksQuery({});
+    if (isLoading) {
+        return <p>Loading....</p>
+    }
+    console.log(data);
     return (
         <div className="mx-auto max-w-7xl px-5 mt-10">
             <div className="flex justify-end items-center gap-3">
@@ -19,9 +27,9 @@ const Tasks = () => {
                 <AddTaskModal></AddTaskModal>
             </div>
             <div className="space-y-5 mt-5">
-                {/* {
-                    allTasks?.map(task => <TaskCard task={task} key={task.id}></TaskCard>)
-                } */}
+                {
+                    !isLoading && data?.tasks.map((task:TTask) => <TaskCard task={task} key={task._id}></TaskCard>)
+                }
             </div>
 
         </div>
