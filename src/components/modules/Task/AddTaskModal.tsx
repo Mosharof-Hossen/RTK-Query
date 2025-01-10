@@ -28,7 +28,6 @@ const AddTaskModal = () => {
         console.log("Inside submit function:", res);
         form.reset();
         setOpen(false);
-        
     }
 
     return (
